@@ -1,19 +1,19 @@
 {
-  "name": "n8n-nodes-<...>",
+  "name": "n8n-nodes-referral-factory",
   "version": "0.1.0",
-  "description": "",
+  "description": "Referral Factory for n8n",
   "keywords": [
     "n8n-community-node-package"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://referral-factory.com",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "Referral Factory",
+    "email": "support@referral-factory.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
+    "url": "https://github.com/referralfactory/n8n-nodes-referral-factory.git"
   },
   "engines": {
     "node": ">=20.15"
@@ -33,12 +33,11 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js"
+      "dist/credentials/ReferralFactoryApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js"
+      "dist/nodes/ReferralFactory/ReferralFactory.node.js",
+      "dist/nodes/ReferralFactoryTrigger/ReferralFactoryTrigger.node.js"
     ]
   },
   "devDependencies": {
@@ -50,6 +49,6 @@
     "typescript": "^5.8.2"
   },
   "peerDependencies": {
-    "n8n-workflow": "*"
+    "n8n-workflow": "^1.82.0"
   }
 }
