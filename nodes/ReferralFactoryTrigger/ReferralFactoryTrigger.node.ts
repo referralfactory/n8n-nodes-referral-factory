@@ -13,7 +13,7 @@ import {
 export class ReferralFactoryTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Referral Factory Trigger',
-		name: 'ReferralFactoryTrigger',
+		name: 'referralFactoryTrigger',
 		icon: 'file:logo.svg',
 		group: ['trigger'],
 		version: 1,
@@ -26,7 +26,7 @@ export class ReferralFactoryTrigger implements INodeType {
 		outputs: [NodeConnectionType.Main],
 		credentials: [
 			{
-				name: 'ReferralFactoryApi',
+				name: 'referralFactoryApi',
 				required: true,
 			},
 		],
@@ -37,27 +37,27 @@ export class ReferralFactoryTrigger implements INodeType {
 				type: 'options',
 				options: [
 					{
-						name: 'When a new user joins your campaign',
+						name: 'When a New User Joins Your Campaign',
 						value: 'user.join',
 						description: 'Triggers when a new user joins or is added to your campaign',
 					},
 					{
-						name: 'When a user is qualified',
+						name: 'When a User Is Qualified',
 						value: 'user.qualified',
 						description: 'Triggers when a user is qualified in Referral Factory',
 					},
 					{
-						name: 'When a reward issued via n8n',
+						name: 'When a Reward Issued via N8n',
 						value: 'reward_issued',
 						description: 'Triggers when a reward issued in Referral Factory via n8n',
 					},
 				],
 				required: true,
-				default: [],
+				default: 'user.join',
 			},
 			{
-				displayName: 'With Sources',
-				description: 'Choose user with which sources should be triggered',
+				displayName: 'With Source Names or IDs',
+				description: 'Choose user with which sources should be triggered. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 				required: true,
 				name: 'sources',
 				type: 'multiOptions',
@@ -72,12 +72,12 @@ export class ReferralFactoryTrigger implements INodeType {
 				default: ['Referred'],
 			},
 			{
-				displayName: 'Choose your campaign',
-				description: 'Select the campaign which was created in Referral Factory',
+				displayName: 'Choose Your Campaign Name or ID',
+				description: 'Select the campaign which was created in Referral Factory. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 				name: 'campaign_id',
 				type: 'options',
 				required: true,
-				default: 'Choose your campaign...',
+				default: '',
 				displayOptions: {
 					show: {
 						event: ['user.join', 'user.qualified'],
@@ -88,12 +88,12 @@ export class ReferralFactoryTrigger implements INodeType {
 				},
 			},
 			{
-				displayName: 'Choose your reward',
-				description: 'Select the reward which was created in Referral Factory.',
+				displayName: 'Choose Your Reward Name or ID',
+				description: 'Select the reward which was created in Referral Factory. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 				name: 'reward_id',
 				type: 'options',
 				required: true,
-				default: 'Choose your reward...',
+				default: '',
 				displayOptions: {
 					show: {
 						event: ['reward_issued'],
@@ -122,7 +122,7 @@ export class ReferralFactoryTrigger implements INodeType {
 				return !!data.webhookId;
 			},
 			async create(this: IHookFunctions): Promise<boolean> {
-				const credentials = await this.getCredentials('ReferralFactoryApi');
+				const credentials = await this.getCredentials('referralFactoryApi');
 				const baseUrl = credentials.baseUrl;
 				const apiKey = credentials.apiKey;
 
@@ -176,7 +176,7 @@ export class ReferralFactoryTrigger implements INodeType {
 			},
 
 			async delete(this: IHookFunctions): Promise<boolean> {
-				const credentials = await this.getCredentials('ReferralFactoryApi');
+				const credentials = await this.getCredentials('referralFactoryApi');
 				const baseUrl = credentials.baseUrl;
 				const apiKey = credentials.apiKey;
 
@@ -209,7 +209,7 @@ export class ReferralFactoryTrigger implements INodeType {
 	methods = {
 		loadOptions: {
 			async getUserSources(this: ILoadOptionsFunctions) {
-				const credentials = await this.getCredentials('ReferralFactoryApi');
+				const credentials = await this.getCredentials('referralFactoryApi');
 
 				const response = await this.helpers.request({
 					method: 'GET',
@@ -230,7 +230,7 @@ export class ReferralFactoryTrigger implements INodeType {
 			},
 
 			async getCampaigns(this: ILoadOptionsFunctions) {
-				const credentials = await this.getCredentials('ReferralFactoryApi');
+				const credentials = await this.getCredentials('referralFactoryApi');
 
 				const response = await this.helpers.request({
 					method: 'GET',
@@ -251,7 +251,7 @@ export class ReferralFactoryTrigger implements INodeType {
 			},
 
 			async getRewards(this: ILoadOptionsFunctions) {
-				const credentials = await this.getCredentials('ReferralFactoryApi');
+				const credentials = await this.getCredentials('referralFactoryApi');
 
 				const response = await this.helpers.request({
 					method: 'GET',

@@ -8,7 +8,7 @@ import {
 export class ReferralFactory implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Referral Factory',
-		name: 'ReferralFactory',
+		name: 'referralFactory',
 		icon: 'file:logo.svg',
 		group: ['transform'],
 		version: 1,
@@ -21,7 +21,7 @@ export class ReferralFactory implements INodeType {
 		outputs: [NodeConnectionType.Main],
 		credentials: [
 			{
-				name: 'ReferralFactoryApi',
+				name: 'referralFactoryApi',
 				required: true,
 			},
 		],
@@ -37,7 +37,7 @@ export class ReferralFactory implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Add new user',
+						name: 'Add New User',
 						value: 'create_user',
 						action: 'Add new user',
 						description: 'Add new user in Referral Factory',
@@ -54,7 +54,7 @@ export class ReferralFactory implements INodeType {
 						},
 					},
 					{
-						name: 'Qualify a user',
+						name: 'Qualify a User',
 						value: 'qualify_user',
 						action: 'Qualify a user',
 						description: 'Qualify a user in Referral Factory',
@@ -73,12 +73,12 @@ export class ReferralFactory implements INodeType {
 				default: 'create_user',
 			},
 			{
-				displayName: 'Choose your campaign',
-				description: 'Select the campaign which was created in Referral Factory',
+				displayName: 'Choose Your Campaign Name or ID',
+				description: 'Select the campaign which was created in Referral Factory. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 				name: 'campaign_id',
 				type: 'options',
 				required: true,
-				default: 'Choose your campaign...',
+				default: '',
 				typeOptions: {
 					loadOptionsMethod: 'getCampaigns',
 				},
@@ -104,6 +104,7 @@ export class ReferralFactory implements INodeType {
 				displayName: 'Email',
 				name: 'email',
 				type: 'string',
+				placeholder: 'name@email.com',
 				required: true,
 				default: '',
 				displayOptions: {
@@ -117,22 +118,22 @@ export class ReferralFactory implements INodeType {
 				name: 'qualify_by',
 				type: 'options',
 				required: true,
-				default: '',
+				default: 'by_email_address',
 				options: [
 					{
-						name: '... email address',
+						name: '... Email Address',
 						value: 'by_email_address',
 						action: 'Qualify user by email address',
 						description: 'Qualify user by email address',
 					},
 					{
-						name: '... referal code',
+						name: '... Referal Code',
 						value: 'by_referral_code',
 						action: 'Qualify user by referral code',
 						description: 'Qualify user by referral code',
 					},
 					{
-						name: '... referral coupon',
+						name: '... Referral Coupon',
 						value: 'by_coupon',
 						action: 'Qualify user by coupon',
 						description: 'Qualify user by coupon',
@@ -145,9 +146,10 @@ export class ReferralFactory implements INodeType {
 				},
 			},
 			{
-				displayName: 'Campaign',
+				displayName: 'Campaign Name or ID',
 				name: 'campaign_id',
 				type: 'options',
+				description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 				required: true,
 				default: '',
 				typeOptions: {
@@ -164,6 +166,7 @@ export class ReferralFactory implements INodeType {
 				displayName: 'Email',
 				name: 'email',
 				type: 'string',
+				placeholder: 'name@email.com',
 				required: true,
 				default: '',
 				displayOptions: {
@@ -205,7 +208,7 @@ export class ReferralFactory implements INodeType {
 	methods = {
 		loadOptions: {
 			async getCampaigns(this: ILoadOptionsFunctions) {
-				const credentials = await this.getCredentials('ReferralFactoryApi');
+				const credentials = await this.getCredentials('referralFactoryApi');
 
 				const response = await this.helpers.request({
 					method: 'GET',

@@ -33,7 +33,7 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/ReferralFactoryApi.credentials.js"
+      "dist/credentials/referralFactoryApi.credentials.js"
     ],
     "nodes": [
       "dist/nodes/ReferralFactory/ReferralFactory.node.js",

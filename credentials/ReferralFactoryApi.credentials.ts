@@ -1,7 +1,7 @@
 import { IAuthenticateGeneric, ICredentialType, INodeProperties } from 'n8n-workflow';
 
 export class ReferralFactoryApi implements ICredentialType {
-	name = 'ReferralFactoryApi';
+	name = 'referralFactoryApi';
 	displayName = 'Referral Factory API';
 	// Uses the link to this tutorial as an example
 	// Replace with your own docs links when building your own nodes
@@ -11,6 +11,7 @@ export class ReferralFactoryApi implements ICredentialType {
 			displayName: 'API Access Token',
 			name: 'apiKey',
 			type: 'string',
+			typeOptions: { password: true },
 			default: '',
 		},
 		{
@@ -20,7 +21,7 @@ export class ReferralFactoryApi implements ICredentialType {
 			default: 'https://referral-factory.com/api/n8n',
 		},
 	];
-	authenticate = {
+	authenticate: IAuthenticateGeneric = {
 		type: 'generic',
 		properties: {
 			headers: {
@@ -29,5 +30,5 @@ export class ReferralFactoryApi implements ICredentialType {
 				Authorization: '={{ "Bearer " + $credentials.apiKey }}',
 			},
 		},
-	} as IAuthenticateGeneric;
+	};
 }
