@@ -41,10 +41,11 @@
   "files": [
     "nodes",
     "credentials",
-    "__tests__",
+    "__tests__/credentials",
     "dist",
     "package.json",
-    "README.md"
+    "README.md",
+    "jest.config.js"
   ],
   "n8n": {
     "n8nNodesApiVersion": 1,
@@ -65,7 +66,7 @@
     "jest": "^30.0.4",
     "prettier": "^3.5.3",
     "ts-jest": "^29.4.0",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   },
   "peerDependencies": {
     "n8n-workflow": "^1.82.0"
