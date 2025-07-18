@@ -28,6 +28,7 @@ export class ReferralFactoryTrigger implements INodeType {
 			{
 				name: 'referralFactoryApi',
 				required: true,
+				testedBy: 'verifyCredentials',
 			},
 		],
 		properties: [

@@ -23,6 +23,7 @@ export class ReferralFactory implements INodeType {
 			{
 				name: 'referralFactoryApi',
 				required: true,
+				testedBy: 'verifyCredentials',
 			},
 		],
 		requestDefaults: {
