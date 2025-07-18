@@ -41,6 +41,7 @@
   "files": [
     "nodes",
     "credentials",
+    "__tests__",
     "dist",
     "package.json",
     "README.md"
