@@ -1,4 +1,4 @@
-import { IAuthenticateGeneric, ICredentialType, INodeProperties } from 'n8n-workflow';
+import { IAuthenticateGeneric, ICredentialType, INodeProperties, ICredentialTestRequest } from 'n8n-workflow';
 
 export class ReferralFactoryApi implements ICredentialType {
 	name = 'referralFactoryApi';
@@ -29,6 +29,13 @@ export class ReferralFactoryApi implements ICredentialType {
 				'Content-Type': 'application/json',
 				Authorization: '={{ "Bearer " + $credentials.apiKey }}',
 			},
+		},
+	};
+	test: ICredentialTestRequest = {
+		request: {
+			baseURL: 'https://referral-factory.com/api/n8n',
+			url: '/test',
+			method: 'GET',
 		},
 	};
 }

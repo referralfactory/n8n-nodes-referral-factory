@@ -26,7 +26,5 @@
 		"nodes/**/*",
 		"nodes/**/*.json",
 		"package.json",
-		"src",
-		"__tests__"
 	],
 }
