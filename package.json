@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-referral-factory",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "Referral Factory for n8n",
   "keywords": [
     "n8n-community-node-package",
