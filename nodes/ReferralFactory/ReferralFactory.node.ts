@@ -59,16 +59,6 @@ export class ReferralFactory implements INodeType {
 						value: 'qualify_user',
 						action: 'Qualify a user',
 						description: 'Qualify a user in Referral Factory',
-						routing: {
-							request: {
-								method: 'POST',
-								url: '/users/qualify',
-								body: {
-									campaign_id: '={{$parameter["campaign_id"]}}',
-									email: '={{$parameter["email"]}}',
-								},
-							},
-						},
 					},
 				],
 				default: 'create_user',
@@ -126,18 +116,46 @@ export class ReferralFactory implements INodeType {
 						value: 'by_email_address',
 						action: 'Qualify user by email address',
 						description: 'Qualify user by email address',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '/users/qualify',
+								body: {
+									campaign_id: '={{$parameter["campaign_id"]}}',
+									email: '={{$parameter["email"]}}',
+								},
+							},
+						},
 					},
 					{
 						name: '... Referal Code',
 						value: 'by_referral_code',
 						action: 'Qualify user by referral code',
 						description: 'Qualify user by referral code',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '/users/qualify',
+								body: {
+									code: '={{$parameter["code"]}}',
+								},
+							},
+						},
 					},
 					{
 						name: '... Referral Coupon',
 						value: 'by_coupon',
 						action: 'Qualify user by coupon',
 						description: 'Qualify user by coupon',
+						routing: {
+							request: {
+								method: 'POST',
+								url: '/users/qualify',
+								body: {
+									coupon: '={{$parameter["coupon"]}}',
+								},
+							},
+						},
 					},
 				],
 				displayOptions: {
