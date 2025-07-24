@@ -17,8 +17,8 @@ export class ReferralFactoryTrigger implements INodeType {
 		icon: 'file:logo.svg',
 		group: ['trigger'],
 		version: 1,
-		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Get data from NASAs API',
+		subtitle: '={{Trigger On: $parameter["event"]}}',
+		description: 'Get data from Referral Factory API',
 		defaults: {
 			name: 'Referral Factory Trigger',
 		},

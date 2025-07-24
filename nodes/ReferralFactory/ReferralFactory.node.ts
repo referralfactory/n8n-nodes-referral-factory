@@ -12,7 +12,7 @@ export class ReferralFactory implements INodeType {
 		icon: 'file:logo.svg',
 		group: ['transform'],
 		version: 1,
-		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
+		subtitle: '={{Action: $parameter["operation"]}}',
 		description: 'Get data from Referral Factory API',
 		defaults: {
 			name: 'Referral Factory',
@@ -179,7 +179,7 @@ export class ReferralFactory implements INodeType {
 			},
 			{
 				displayName: 'Referral Code',
-				name: 'referral_code',
+				name: 'code',
 				type: 'string',
 				required: true,
 				default: '',
