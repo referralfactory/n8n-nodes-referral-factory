@@ -28,7 +28,6 @@ export class ReferralFactoryTrigger implements INodeType {
 			{
 				name: 'referralFactoryApi',
 				required: true,
-				testedBy: 'verifyCredentials',
 			},
 		],
 		properties: [
@@ -160,7 +159,10 @@ export class ReferralFactoryTrigger implements INodeType {
 					};
 				}
 
-				const response = await this.helpers.request({
+				const response = await this.helpers.requestWithAuthentication.call(
+					this,
+					'referralFactoryApi',
+				{
 					method: method as IHttpRequestMethods,
 					url: url,
 					headers: {
@@ -179,7 +181,6 @@ export class ReferralFactoryTrigger implements INodeType {
 			async delete(this: IHookFunctions): Promise<boolean> {
 				const credentials = await this.getCredentials('referralFactoryApi');
 				const baseUrl = credentials.baseUrl;
-				const apiKey = credentials.apiKey;
 
 				const webhookId = this.getWorkflowStaticData('node').webhookId;
 
@@ -191,13 +192,12 @@ export class ReferralFactoryTrigger implements INodeType {
 					url = `${baseUrl}/rewards/${this.getNodeParameter('reward_id')}`;
 				}
 
-				await this.helpers.request({
+				await this.helpers.requestWithAuthentication.call(
+					this,
+					'referralFactoryApi',
+				{
 					method: 'DELETE',
 					url: url,
-					headers: {
-						Authorization: `Bearer ${apiKey}`,
-						Accept: 'application/json',
-					},
 				});
 
 				this.getWorkflowStaticData('node').webhookId = null;
@@ -212,14 +212,12 @@ export class ReferralFactoryTrigger implements INodeType {
 			async getUserSources(this: ILoadOptionsFunctions) {
 				const credentials = await this.getCredentials('referralFactoryApi');
 
-				const response = await this.helpers.request({
+				const response = await this.helpers.requestWithAuthentication.call(
+					this,
+					'referralFactoryApi',
+				{
 					method: 'GET',
 					url: `${credentials.baseUrl}/user-sources`,
-					headers: {
-						Authorization: `Bearer ${credentials.apiKey}`,
-						Accept: 'application/json',
-						'Content-Type': 'application/json',
-					},
 				});
 
 				const parsed = JSON.parse(response);
@@ -233,14 +231,12 @@ export class ReferralFactoryTrigger implements INodeType {
 			async getCampaigns(this: ILoadOptionsFunctions) {
 				const credentials = await this.getCredentials('referralFactoryApi');
 
-				const response = await this.helpers.request({
+				const response = await this.helpers.requestWithAuthentication.call(
+					this,
+					'referralFactoryApi',
+				{
 					method: 'GET',
 					url: `${credentials.baseUrl}/campaigns`,
-					headers: {
-						Authorization: `Bearer ${credentials.apiKey}`,
-						Accept: 'application/json',
-						'Content-Type': 'application/json',
-					},
 				});
 
 				const parsed = JSON.parse(response);
@@ -254,14 +250,12 @@ export class ReferralFactoryTrigger implements INodeType {
 			async getRewards(this: ILoadOptionsFunctions) {
 				const credentials = await this.getCredentials('referralFactoryApi');
 
-				const response = await this.helpers.request({
+				const response = await this.helpers.requestWithAuthentication.call(
+					this,
+					'referralFactoryApi',
+				{
 					method: 'GET',
 					url: `${credentials.baseUrl}/rewards`,
-					headers: {
-						Authorization: `Bearer ${credentials.apiKey}`,
-						Accept: 'application/json',
-						'Content-Type': 'application/json',
-					},
 				});
 
 				const parsed = JSON.parse(response);

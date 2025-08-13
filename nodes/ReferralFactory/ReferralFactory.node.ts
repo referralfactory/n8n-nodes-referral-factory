@@ -23,7 +23,6 @@ export class ReferralFactory implements INodeType {
 			{
 				name: 'referralFactoryApi',
 				required: true,
-				testedBy: 'verifyCredentials',
 			},
 		],
 		requestDefaults: {
@@ -229,14 +228,12 @@ export class ReferralFactory implements INodeType {
 			async getCampaigns(this: ILoadOptionsFunctions) {
 				const credentials = await this.getCredentials('referralFactoryApi');
 
-				const response = await this.helpers.request({
+				const response = await this.helpers.requestWithAuthentication.call(
+					this,
+					'referralFactoryApi',
+				{
 					method: 'GET',
 					url: `${credentials.baseUrl}/campaigns`,
-					headers: {
-						Authorization: `Bearer ${credentials.apiKey}`,
-						Accept: 'application/json',
-						'Content-Type': 'application/json',
-					},
 				});
 
 				const parsed = JSON.parse(response);
